@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7f0wea1dshh3"]
+
+[ext_resource type="PackedScene" uid="uid://cwkgqaijcoqvn" path="res://Scenes/Rooms/level_collection.tscn" id="1_hpc76"]
+[ext_resource type="Script" uid="uid://dr27mi7c6v6cs" path="res://Scripts/UtilityClasses/level_generator.gd" id="2_tr2i4"]
+[ext_resource type="PackedScene" uid="uid://dgye640vsmh43" path="res://Scenes/Entities/player.tscn" id="3_nhkr4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="LevelCollection" parent="." instance=ExtResource("1_hpc76")]
+visible = false
+
+[node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("collection")]
+script = ExtResource("2_tr2i4")
+depth = 5
+collection = NodePath("../LevelCollection")
+
+[node name="Player" parent="." instance=ExtResource("3_nhkr4")]

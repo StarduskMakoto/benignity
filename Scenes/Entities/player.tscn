@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgye640vsmh43"]
+
+[ext_resource type="Texture2D" uid="uid://b3xe870u1udsr" path="res://Assets/Entities/Player.png" id="1_blnjl"]
+[ext_resource type="Script" uid="uid://cjonbwiqd82xs" path="res://Scripts/Entities/player_entity.gd" id="1_yqx0t"]
+[ext_resource type="Script" uid="uid://bqcwym87c8dlw" path="res://Scripts/UtilityClasses/attribute_handler.gd" id="2_nqm6o"]
+[ext_resource type="Script" uid="uid://dh518yighyqd" path="res://Scripts/Attributes/health.gd" id="3_qbyki"]
+[ext_resource type="Texture2D" uid="uid://cy165ntmwvp52" path="res://Assets/UI/bar_bottom.png" id="4_a1rq5"]
+[ext_resource type="Texture2D" uid="uid://c8cx3j1kkmawk" path="res://Assets/UI/bar_progress.png" id="5_yqx0t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nqm6o"]
+radius = 22.0
+height = 116.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_yqx0t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_blnjl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_nqm6o")
+
+[node name="AttributeHandler" type="Node2D" parent="."]
+script = ExtResource("2_nqm6o")
+
+[node name="Health" type="Node2D" parent="AttributeHandler" node_paths=PackedStringArray("healthBar")]
+script = ExtResource("3_qbyki")
+healthBar = NodePath("TextureProgressBar")
+eventHandles = Array[int]([1])
+metadata/_custom_type_script = "uid://hka123egw08m"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AttributeHandler/Health"]
+modulate = Color(0.44, 1, 0.729333, 1)
+offset_left = -50.0
+offset_top = -90.0
+offset_right = 50.0
+offset_bottom = -70.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_a1rq5")
+texture_progress = ExtResource("5_yqx0t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
